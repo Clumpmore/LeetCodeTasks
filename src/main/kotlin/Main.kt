@@ -1,39 +1,52 @@
 fun main() {
-    val nums1 = intArrayOf(2, 7, 11, 15)
-    val nums2 = intArrayOf(3, 3, 4)
-    val nums3 = intArrayOf(3, 3)
-    val target1 = 9
-    val target2 = 6
-    val target3 = 6
-    val twoSum1 = twoSum(nums1, target1)
-    val twoSum2 = twoSum(nums2, target2)
-    val twoSum3 = twoSum(nums3, target3)
-    println(twoSum1)
-    println(twoSum2)
-    println(twoSum3)
+
 }
 
-fun twoSum(nums: IntArray, target: Int): ArrayList<Int> {
-    val list = arrayListOf<Int>()
-    var checkSolution = false
-    for (i in 0 until nums.size - 1) {
-
-        for (j in 1 until nums.size) {
-            if (i != j) {
-                if (nums[i] + nums[j] == target) {
-                    list.add(i)
-                    list.add(j)
-                    checkSolution = true
-                    break
-                }
-            }
+class Solution {
+    fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
+        var l1 = list1
+        var l2 = list2
+        if (l1 == null) {
+            return l2
         }
-        if (checkSolution) break
-    }
-    if (list.size == 0) {
-        list.add(1)
-        list.add(2)
-    }
-    return list
-}
+        if (l2 == null) {
+            return list1
+        }
+        val head:ListNode
+        var temp:ListNode?
+        if (l1.`val`<l2.`val`) {
+            head = ListNode(l1.`val`)
+            temp = head
+            l1 = l1.next
+        } else  {
+            head = ListNode(l2.`val`)
+            temp = head
+            l2 = l2.next
+        }
+        while (l1 != null && l2!=null) {
+            if (l1.`val`<l2.`val`) {
+                temp!!.next = ListNode(l1.`val`)
+                l1 = l1.next
+            } else  {
+                temp!!.next = ListNode(l2.`val`)
+                l2 = l2.next
+            }
+            temp = temp.next
+        }
+        while (l1 != null) {
+            temp!!.next = ListNode(l1.`val`)
+            l1 = l1.next
+            temp = temp.next
+        }
+        while (l2 != null) {
+            temp!!.next = ListNode(l2.`val`)
+            l2 = l2.next
+            temp = temp.next
+        }
+        return head
 
+    }
+}
+class ListNode(var `val`: Int) {
+        var next: ListNode? = null
+     }
