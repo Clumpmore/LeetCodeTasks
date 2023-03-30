@@ -1,39 +1,19 @@
 fun main() {
-    val nums1 = intArrayOf(2, 7, 11, 15)
-    val nums2 = intArrayOf(3, 3, 4)
-    val nums3 = intArrayOf(3, 3)
-    val target1 = 9
-    val target2 = 6
-    val target3 = 6
-    val twoSum1 = twoSum(nums1, target1)
-    val twoSum2 = twoSum(nums2, target2)
-    val twoSum3 = twoSum(nums3, target3)
-    println(twoSum1)
-    println(twoSum2)
-    println(twoSum3)
+
 }
-
-fun twoSum(nums: IntArray, target: Int): ArrayList<Int> {
-    val list = arrayListOf<Int>()
-    var checkSolution = false
-    for (i in 0 until nums.size - 1) {
-
-        for (j in 1 until nums.size) {
-            if (i != j) {
-                if (nums[i] + nums[j] == target) {
-                    list.add(i)
-                    list.add(j)
-                    checkSolution = true
-                    break
-                }
+fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
+    var i = m - 1
+    var j = n - 1
+    var k = m + n - 1
+    while (k >= 0) {
+        if (i >= 0 && j >= 0) {
+            if (nums1[i] >= nums2[j]) {
+                nums1[k--] = nums1[i--]
+            } else {
+                nums1[k--] = nums2[j--]
             }
-        }
-        if (checkSolution) break
+        } else if (j >= 0) {
+            nums1[k--] = nums2[j--]
+        } else break
     }
-    if (list.size == 0) {
-        list.add(1)
-        list.add(2)
-    }
-    return list
 }
-
